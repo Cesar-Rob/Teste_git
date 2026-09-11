@@ -1,116 +1,57 @@
-//imports
-import { useState } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native'
-import App from './App';
-import Feather from '@expo/vector-icons/Feather';
+import { StyleSheet, Text, View } from 'react-native';
 
-//função principal
-export default function Login() {
-    const [email, setEmail] = useState<string>('');
-    const [senha, setSenha] = useState<string>('');
+export default function App() {
+  //string
+  let nome:string = "Robson";
 
-    const [emailCerto, setEmailCerto] = useState<string>('teste@gmail.com');
-    const [senhaCerta, setSenhaCerta] = useState<string>('teste123');
-    const [exibir, setExibir] = useState<boolean>(false);
-    //npx expo install @expo/vector-icons
-    function exibirSenha() {
-        setExibir(!exibir);
-    }
+  //number
+  let idade:number = 17;
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.texto}>Login</Text>
-            <TextInput
-                style={styles.InputEmail}
-                onChangeText={setEmail}
-                value={email}
-                placeholder='Email'
-                placeholderTextColor='#615f5f9d'
-            />
+  //boolena
+  let statusMatricula:boolean = true;
 
-            <View style={styles.ViewInputSenha}>
-                <TextInput
-                    style={styles.InputSenha}
-                    onChangeText={setSenha}
-                    value={senha}
-                    placeholder='Senha'
-                    placeholderTextColor='#615f5f9d'
-                    secureTextEntry={exibir ? false : true}
+  //array
+  let pessoas:string[] = ["Rob", "San", "Eli"];
+  let idades:number[] = [17, 16 , 11];
 
-                />
-                {exibir
-                    ? <Feather onPress={exibirSenha} name="eye" size={24} color="black" />
-                    : <Feather onPress={exibirSenha} name="eye-off" size={24} color="black" />}
-            </View>
+  //tuple
+  let dadosPessoa:[string,number,string,boolean] = ["César", 17.6, "FMM", true];
 
-            {email === emailCerto && senha === senhaCerta && email !== '' && senha !== '' && (
-                <Text style={styles.certo}> Login realizado com sucesso!</Text>
-            )}
+  //object
+  type paciente ={
+    nome:string,
+    idade?:number,
+    status:boolean
+  }
 
-            {(email !== senhaCerta || senha !== senhaCerta) && email != '' && senha !== '' && (
-                <Text style={styles.errado}>Erro ao fazer login. Email ou senha incorretos</Text>
-            )}
-        </View>
-    )
 
+  let paciente:paciente = {
+    nome:"Francisco",
+    idade:19,
+    status:false
+
+  }
+
+
+  return (
+    <View style={styles.container}>
+      <Text> Nome: {nome}</Text>
+      <Text> idades: {idade}</Text>
+      <Text> Status Matrícula: {statusMatricula}</Text>
+      <Text> nome selecionado Rob: {pessoas[0]}</Text>
+      <Text> idade selecionado: {idades[0]}</Text>
+      <Text> Nome paciente: {paciente.nome}</Text>
+      <Text> Nome idade: {paciente.idade}</Text>
+      <Text>{`status: ${paciente.status}`} </Text>
+    </View>
+  );
 }
 
-//stylesheet
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-        gap: 10,
-        backgroundColor: '#309bff'
-    },
-    texto: {
-        fontSize: 24,
-
-
-    },
-    InputEmail: {
-        backgroundColor: '#ffff',
-        width: '100%',
-        borderRadius: 8,
-        fontSize: 24,
-        padding: 10,
-
-
-    },
-    InputSenha: {
-        borderRadius: 8,
-        fontSize: 24,
-        padding: 10,
-        width: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingRight: 10
-
-
-    },
-    ViewInputSenha: {
-        backgroundColor: '#ffff',
-        width: '100%',
-        borderRadius: 8,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingRight: 10
-
-
-    },
-    errado: {
-        color: '#c01313',
-
-
-    },
-    certo: {
-        color: '#c01313',
-
-
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#f0f0f0',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
-
