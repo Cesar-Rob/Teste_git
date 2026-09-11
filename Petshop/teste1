@@ -1,0 +1,116 @@
+//imports
+import { useState } from 'react';
+import { View, Text, StyleSheet, TextInput } from 'react-native'
+import App from './App';
+import Feather from '@expo/vector-icons/Feather';
+
+//função principal
+export default function Login() {
+    const [email, setEmail] = useState<string>('');
+    const [senha, setSenha] = useState<string>('');
+
+    const [emailCerto, setEmailCerto] = useState<string>('teste@gmail.com');
+    const [senhaCerta, setSenhaCerta] = useState<string>('teste123');
+    const [exibir, setExibir] = useState<boolean>(false);
+    //npx expo install @expo/vector-icons
+    function exibirSenha() {
+        setExibir(!exibir);
+    }
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.texto}>Login</Text>
+            <TextInput
+                style={styles.InputEmail}
+                onChangeText={setEmail}
+                value={email}
+                placeholder='Email'
+                placeholderTextColor='#615f5f9d'
+            />
+
+            <View style={styles.ViewInputSenha}>
+                <TextInput
+                    style={styles.InputSenha}
+                    onChangeText={setSenha}
+                    value={senha}
+                    placeholder='Senha'
+                    placeholderTextColor='#615f5f9d'
+                    secureTextEntry={exibir ? false : true}
+
+                />
+                {exibir
+                    ? <Feather onPress={exibirSenha} name="eye" size={24} color="black" />
+                    : <Feather onPress={exibirSenha} name="eye-off" size={24} color="black" />}
+            </View>
+
+            {email === emailCerto && senha === senhaCerta && email !== '' && senha !== '' && (
+                <Text style={styles.certo}> Login realizado com sucesso!</Text>
+            )}
+
+            {(email !== senhaCerta || senha !== senhaCerta) && email != '' && senha !== '' && (
+                <Text style={styles.errado}>Erro ao fazer login. Email ou senha incorretos</Text>
+            )}
+        </View>
+    )
+
+}
+
+//stylesheet
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+        gap: 10,
+        backgroundColor: '#309bff'
+    },
+    texto: {
+        fontSize: 24,
+
+
+    },
+    InputEmail: {
+        backgroundColor: '#ffff',
+        width: '100%',
+        borderRadius: 8,
+        fontSize: 24,
+        padding: 10,
+
+
+    },
+    InputSenha: {
+        borderRadius: 8,
+        fontSize: 24,
+        padding: 10,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingRight: 10
+
+
+    },
+    ViewInputSenha: {
+        backgroundColor: '#ffff',
+        width: '100%',
+        borderRadius: 8,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingRight: 10
+
+
+    },
+    errado: {
+        color: '#c01313',
+
+
+    },
+    certo: {
+        color: '#c01313',
+
+
+    },
+});
+
